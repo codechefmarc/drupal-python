@@ -1,0 +1,13 @@
+<?php
+
+function ai_theme($existing, $type, $theme, $path): array {
+  return [
+    'ai_tokenizer' => [
+      'variables' => [
+        'test_string' => NULL,
+        'num_tokens' => NULL,
+        'encoded' => [],
+      ],
+    ],
+  ];
+}

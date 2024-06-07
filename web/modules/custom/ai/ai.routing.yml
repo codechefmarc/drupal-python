@@ -1,0 +1,7 @@
+ai.example_controller_fetch:
+  path: '/example/fetch'
+  defaults:
+    _controller: '\Drupal\ai\Controller\ExampleController::fetch'
+    _title: 'Fetch Example'
+  requirements:
+    _permission: 'access content'

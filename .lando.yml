@@ -1,4 +1,4 @@
-name: local-drupal-dev
+name: drupal-python
 recipe: drupal10
 config:
   webroot: web
@@ -8,7 +8,7 @@ tooling:
   drush:
     service: appserver
     env:
-      DRUSH_OPTIONS_URI: "https://local-drupal-dev.lndo.site"
+      DRUSH_OPTIONS_URI: "https://drupal-python.lndo.site"
   xdebug-on:
     service: appserver
     description: Enable xdebug for nginx.
@@ -21,8 +21,21 @@ tooling:
       rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && pkill -o -USR2
       php-fpm
     user: root
+  pip:
+    service: python
+  python:
+    service: python
 services:
   appserver:
     xdebug: true
     config:
       php: .vscode/php.ini
+  python:
+    type: python:3.9
+    build:
+      - 'pip install -r python/requirements.txt'
+    run:
+      - python python/app.py
+proxy:
+  python:
+    - python.lndo.site:5001
